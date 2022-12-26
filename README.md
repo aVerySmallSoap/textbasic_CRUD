@@ -6,5 +6,5 @@ JDK v18 can be downloaded in the link below: <br>
 https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html
 
 Created by:<br>
-Lirys Nhoj Roben S. Belleza & Angelo C. Mariano<br>
+Lirys Nhoj Roben S. Belleza & Angelo C. Mariano & Missing friend<br>
 BSIT - 1G<br>
