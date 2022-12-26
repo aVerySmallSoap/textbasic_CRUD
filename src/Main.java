@@ -7,7 +7,7 @@ public class Main
 {
     static final int COLUMNS = 8;
     static int Rows = 5, numOfElements = 0, Choice;
-    static String Name, Section, English, Math, Science, PE, Filipino;
+    static String Name, Section, Quizzes, writtenWorks, Performance, Midterms, Finals;
     static float Average;
     static String[][] Array = new String[Rows][COLUMNS];
     static Scanner scanner = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        Array[0][0] = "Name"; Array[0][1] = "Section"; Array[0][2] = "English"; Array[0][3] = "Math"; Array[0][4] = "Science"; Array[0][5] = "Physical Education"; Array[0][6] = "Filipino"; Array[0][7] = "Average";
+        Array[0][0] = "Name"; Array[0][1] = "Section"; Array[0][2] = "Quizzes"; Array[0][3] = "Written Works"; Array[0][4] = "Performance"; Array[0][5] = "Midterms"; Array[0][6] = "Finals"; Array[0][7] = "Average";
 
         while(true)
         {
@@ -75,31 +75,31 @@ public class Main
         System.out.println("Enter student's section: ");
         Section = scanner.nextLine();
 
-        System.out.println("Enter student's English grade: ");
-        English = scanner.next();
-        inputValidator(English);
+        System.out.println("Enter student's Quizzes: ");
+        Quizzes = scanner.next();
+        inputValidator(Quizzes);
 
-        System.out.println("Enter student's Math grade: ");
-        Math = scanner.next();
-        inputValidator(Math);
+        System.out.println("Enter student's Written Works: ");
+        writtenWorks = scanner.next();
+        inputValidator(writtenWorks);
 
-        System.out.println("Enter student's Science grade: ");
-        Science = scanner.next();
-        inputValidator(Science);
+        System.out.println("Enter student's Performance: ");
+        Performance = scanner.next();
+        inputValidator(Performance);
 
-        System.out.println("Enter student's Physical Education grade: ");
-        PE = scanner.next();
-        inputValidator(PE);
+        System.out.println("Enter student's Midterms: ");
+        Midterms = scanner.next();
+        inputValidator(Midterms);
 
-        System.out.println("Enter student's Filipino grade: ");
-        Filipino = scanner.next();
-        inputValidator(Filipino);
+        System.out.println("Enter student's Finals: ");
+        Finals = scanner.next();
+        inputValidator(Finals);
 
-        getAverage( Integer.parseInt(English),
-                    Integer.parseInt(Math),
-                    Integer.parseInt(Science),
-                    Integer.parseInt(PE),
-                    Integer.parseInt(Filipino));
+        getAverage( Integer.parseInt(Quizzes),
+                    Integer.parseInt(writtenWorks),
+                    Integer.parseInt(Performance),
+                    Integer.parseInt(Midterms),
+                    Integer.parseInt(Finals));
 
         for (int i = 1; i < Array.length; i++)
         {
@@ -108,11 +108,11 @@ public class Main
               if(Array[i][j] == null){
                   Array[i][j] = Name;
                   Array[i][j+1] = Section;
-                  Array[i][j+2] = English;
-                  Array[i][j+3] = Math;
-                  Array[i][j+4] = Science;
-                  Array[i][j+5] = PE;
-                  Array[i][j+6] = Filipino;
+                  Array[i][j+2] = Quizzes;
+                  Array[i][j+3] = writtenWorks;
+                  Array[i][j+4] = Performance;
+                  Array[i][j+5] = Midterms;
+                  Array[i][j+6] = Finals;
                   Array[i][j+7] = Float.valueOf(Average).toString();
                   ++numOfElements;
                   break;
@@ -147,7 +147,12 @@ public class Main
                 inputValidator(_row);
 
                 for (int i = 0; i < Array[0].length; i++) {
-                    System.out.print(Array[0][i] + " \t\t\t");
+                    System.out.printf("%-20s|",Array[0][i]);
+                }
+
+                System.out.println();
+                for (int i = 0; i <= 167; i++) {
+                    System.out.print("-");
                 }
 
                 for (int i = 0; i < Array.length; i++)
@@ -156,20 +161,31 @@ public class Main
                     {
                         for (int j = 0; j < Array[i].length; j++)
                         {
-                            System.out.print(Array[i][j] + " \t\t\t");
+                            System.out.printf("%-20s|",Array[i][j]);
                         }
                     }
                     System.out.println();
                 }
                 break;
             case 2:
-                for (int i = 0; i < Array.length; i++)
+
+                for (int i = 0; i < Array[0].length; i++) {
+                    System.out.printf("%-20s|",Array[0][i]);
+                }
+
+                System.out.println();
+                for (int i = 0; i <= 167; i++) {
+                    System.out.print("-");
+                }
+                System.out.println();
+
+                for (int i = 1; i < Array.length; i++)
                 {
                     if(Array[i][0] != null)
                     {
                         for (int j = 0; j < Array[i].length; j++)
                         {
-                            System.out.print(Array[i][j] + " \t\t\t");
+                            System.out.printf("%-20s|",Array[i][j]);
                         }
                         System.out.println();
                     }
@@ -191,17 +207,21 @@ public class Main
     {
         System.out.println("Select which row entry to update: ");
         int _row = scanner.nextInt();
-        inputValidator(_row);
-
+        if(_row == 0 || Array[_row][0] == null)
+        {
+            System.out.println("""
+                    Error: entry non-existent
+                    """);
+        }else{
         System.out.println("""
                 Select which data you want to change:
                 1 - Name
                 2 - Section
-                3 - English grade
-                4 - Math grade
-                5 - Science grade
-                6 - Physical Education grade
-                7 - Filipino grade
+                3 - Quizzes
+                4 - Written Works
+                5 - Performance
+                6 - Midterms
+                7 - Finals
                 8 - All
                 """);
         Choice = scanner.nextInt();
@@ -236,93 +256,93 @@ public class Main
                 }
                 break;
             case 3:
-                System.out.println("Enter English grade: ");
-                English = scanner.next();
-                inputValidator(English);
+                System.out.println("Enter Quizzes: ");
+                Quizzes = scanner.next();
+                inputValidator(Quizzes);
 
                 for (int i = 1; i < Array.length; i++)
                 {
                     if(i == _row)
                     {
-                        Array[i][2] = English;
-                        getAverage( Integer.parseInt(English),
-                                    Integer.parseInt(Math),
-                                    Integer.parseInt(Science),
-                                    Integer.parseInt(PE),
-                                    Integer.parseInt(Filipino));
+                        Array[i][2] = Quizzes;
+                        getAverage( Integer.parseInt(Quizzes),
+                                    Integer.parseInt(writtenWorks),
+                                    Integer.parseInt(Performance),
+                                    Integer.parseInt(Midterms),
+                                    Integer.parseInt(Finals));
                         Array[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
             case 4:
-                System.out.println("Enter Math grade: ");
-                Math = scanner.next();
-                inputValidator(Math);
+                System.out.println("Enter Written Works: ");
+                writtenWorks = scanner.next();
+                inputValidator(writtenWorks);
 
                 for (int i = 1; i < Array.length; i++)
                 {
                     if(i == _row)
                     {
-                        Array[i][3] = Math;
-                        getAverage( Integer.parseInt(English),
-                                    Integer.parseInt(Math),
-                                    Integer.parseInt(Science),
-                                    Integer.parseInt(PE),
-                                    Integer.parseInt(Filipino));
+                        Array[i][3] = writtenWorks;
+                        getAverage( Integer.parseInt(Quizzes),
+                                    Integer.parseInt(writtenWorks),
+                                    Integer.parseInt(Performance),
+                                    Integer.parseInt(Midterms),
+                                    Integer.parseInt(Finals));
                         Array[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
             case 5:
-                System.out.println("Enter Science grade: ");
-                Science = scanner.next();
-                inputValidator(Science);
+                System.out.println("Enter Performance: ");
+                Performance = scanner.next();
+                inputValidator(Performance);
 
                 for (int i = 1; i < Array.length; i++)
                 {
                     if (i == _row) {
-                        Array[i][4] = Science;
-                        getAverage( Integer.parseInt(English),
-                                    Integer.parseInt(Math),
-                                    Integer.parseInt(Science),
-                                    Integer.parseInt(PE),
-                                    Integer.parseInt(Filipino));
+                        Array[i][4] = Performance;
+                        getAverage( Integer.parseInt(Quizzes),
+                                    Integer.parseInt(writtenWorks),
+                                    Integer.parseInt(Performance),
+                                    Integer.parseInt(Midterms),
+                                    Integer.parseInt(Finals));
                         Array[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
             case 6:
-                System.out.println("Enter Physical Education grade: ");
-                PE = scanner.next();
-                inputValidator(PE);
+                System.out.println("Enter Midterms: ");
+                Midterms = scanner.next();
+                inputValidator(Midterms);
 
                 for (int i = 1; i < Array.length; i++)
                 {
                     if (i == _row) {
-                        Array[i][5] = PE;
-                        getAverage( Integer.parseInt(English),
-                                    Integer.parseInt(Math),
-                                    Integer.parseInt(Science),
-                                    Integer.parseInt(PE),
-                                    Integer.parseInt(Filipino));
+                        Array[i][5] = Midterms;
+                        getAverage( Integer.parseInt(Quizzes),
+                                    Integer.parseInt(writtenWorks),
+                                    Integer.parseInt(Performance),
+                                    Integer.parseInt(Midterms),
+                                    Integer.parseInt(Finals));
                         Array[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
             case 7:
-                System.out.println("Enter Filipino grade: ");
-                Filipino = scanner.next();
-                inputValidator(Filipino);
+                System.out.println("Enter Finals: ");
+                Finals = scanner.next();
+                inputValidator(Finals);
 
                 for (int i = 1; i < Array.length; i++)
                 {
                     if (i == _row) {
-                        Array[i][6] = Filipino;
-                        getAverage( Integer.parseInt(English),
-                                    Integer.parseInt(Math),
-                                    Integer.parseInt(Science),
-                                    Integer.parseInt(PE),
-                                    Integer.parseInt(Filipino));
+                        Array[i][6] = Finals;
+                        getAverage( Integer.parseInt(Quizzes),
+                                    Integer.parseInt(writtenWorks),
+                                    Integer.parseInt(Performance),
+                                    Integer.parseInt(Midterms),
+                                    Integer.parseInt(Finals));
                         Array[i][7] = Float.valueOf(Average).toString();
                     }
                 }
@@ -336,36 +356,36 @@ public class Main
                 System.out.println("Enter student's section: ");
                 Section = scanner.nextLine();
 
-                System.out.println("Enter student's English grade: ");
-                English = scanner.next();
+                System.out.println("Enter student's Quizzes: ");
+                Quizzes = scanner.next();
 
-                inputValidator(English);
+                inputValidator(Quizzes);
 
-                System.out.println("Enter student's Math grade: ");
-                Math = scanner.next();
+                System.out.println("Enter student's Written Works: ");
+                writtenWorks = scanner.next();
 
-                inputValidator(Math);
+                inputValidator(writtenWorks);
 
-                System.out.println("Enter student's Science grade: ");
-                Science = scanner.next();
+                System.out.println("Enter student's Performance: ");
+                Performance = scanner.next();
 
-                inputValidator(Science);
+                inputValidator(Performance);
 
-                System.out.println("Enter student's Physical Education grade: ");
-                PE = scanner.next();
+                System.out.println("Enter student's Midterms: ");
+                Midterms = scanner.next();
 
-                inputValidator(PE);
+                inputValidator(Midterms);
 
-                System.out.println("Enter student's Filipino grade: ");
-                Filipino = scanner.next();
+                System.out.println("Enter student's Finals: ");
+                Finals = scanner.next();
 
-                inputValidator(Filipino);
+                inputValidator(Finals);
 
-                getAverage( Integer.parseInt(English),
-                            Integer.parseInt(Math),
-                            Integer.parseInt(Science),
-                            Integer.parseInt(PE),
-                            Integer.parseInt(Filipino));
+                getAverage( Integer.parseInt(Quizzes),
+                            Integer.parseInt(writtenWorks),
+                            Integer.parseInt(Performance),
+                            Integer.parseInt(Midterms),
+                            Integer.parseInt(Finals));
 
                 for (int i = 1; i < Array.length; i++)
                 {
@@ -375,11 +395,11 @@ public class Main
                         {
                             Array[i][j] = Name;
                             Array[i][j+1] = Section;
-                            Array[i][j+2] = English;
-                            Array[i][j+3] = Math;
-                            Array[i][j+4] = Science;
-                            Array[i][j+5] = PE;
-                            Array[i][j+6] = Filipino;
+                            Array[i][j+2] = Quizzes;
+                            Array[i][j+3] = writtenWorks;
+                            Array[i][j+4] = Performance;
+                            Array[i][j+5] = Midterms;
+                            Array[i][j+6] = Finals;
                             Array[i][j+7] = Float.valueOf(Average).toString();
                         }
                     }
@@ -391,6 +411,7 @@ public class Main
                         """);
                 System.exit(0);
                 break;
+            }
         }
     }
 
@@ -401,19 +422,20 @@ public class Main
     {
         System.out.println("Select which row entry to delete: ");
         int _row = scanner.nextInt();
-        inputValidator(_row);
-
-        for (int i = 1; i < Array.length; i++)
-        {
-            if(i == _row)
+        if(!inputValidator(_row) && Array[_row][0] != null){
+            for (int i = 1; i < Array.length; i++)
             {
-                for (int j = 0; j < Array[i].length; j++)
+                if(i == _row)
                 {
-                    Array[i][j] = null;
+                    for (int j = 0; j < Array[i].length; j++)
+                    {
+                        Array[i][j] = null;
+                    }
                 }
             }
+            --numOfElements;
+            System.out.println("Entry Deleted!");
         }
-        System.out.println("Entry Deleted!");
     }
 
     /**
@@ -465,13 +487,15 @@ public class Main
      * Checks the users {@code input} for validation
      * @param input int
      */
-    static void inputValidator(int input)
+    static boolean inputValidator(int input)
     {
-        if(input >= Array.length-1)
+        if(input > numOfElements)
         {
             System.out.println("""
                     Error: row is out of bounds
                     """);
+            return true;
         }
+        return false;
     }
 }
