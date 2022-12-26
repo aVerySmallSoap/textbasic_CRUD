@@ -145,14 +145,8 @@ public class Main
             case 1:
                 System.out.println("Enter row: ");
                 int _row = scanner.nextInt();
-                inputValidator(_row);
+                if(!inputValidator(_row)){
 
-                if(_row == 0 || Students[_row][0] == null)
-                {
-                    System.out.println("""
-                    Error: entry non-existent
-                    """);
-                }else{
                 for (int i = 0; i < Students[0].length; i++)
                 {
                     System.out.printf("%-20s|", Students[0][i]);
@@ -163,16 +157,16 @@ public class Main
                     System.out.print("-");
                 }
 
-                for (int i = 0; i < Students.length; i++)
-                {
-                    if(i == _row)
+                    for (int i = 0; i < Students.length; i++)
                     {
-                        for (int j = 0; j < Students[i].length; j++)
+                        if(i == _row)
                         {
-                            System.out.printf("%-20s|", Students[i][j]);
+                            for (int j = 0; j < Students[i].length; j++)
+                            {
+                                System.out.printf("%-20s|", Students[i][j]);
+                            }
                         }
-                    }
-                    System.out.println();
+                        System.out.println();
                     }
                 }
                 break;
@@ -498,10 +492,10 @@ public class Main
      */
     static boolean inputValidator(int input)
     {
-        if(input > numOfElements)
+        if(input > numOfElements || input == 0)
         {
             System.out.println("""
-                    Error: row is out of bounds
+                    Error: entry non-existent
                     """);
             return true;
         }
