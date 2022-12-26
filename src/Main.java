@@ -9,13 +9,13 @@ public class Main
     static int Rows = 5, numOfElements = 0, Choice;
     static String Name, Section, Quizzes, writtenWorks, Performance, Midterms, Finals;
     static float Average;
-    static String[][] Array = new String[Rows][COLUMNS];
+    static String[][] Students = new String[Rows][COLUMNS];
     static Scanner scanner = new Scanner(System.in);
 
 
     public static void main(String[] args)
     {
-        Array[0][0] = "Name"; Array[0][1] = "Section"; Array[0][2] = "Quizzes"; Array[0][3] = "Written Works"; Array[0][4] = "Performance"; Array[0][5] = "Midterms"; Array[0][6] = "Finals"; Array[0][7] = "Average";
+        Students[0][0] = "Name"; Students[0][1] = "Section"; Students[0][2] = "Quizzes"; Students[0][3] = "Written Works"; Students[0][4] = "Performance"; Students[0][5] = "Midterms"; Students[0][6] = "Finals"; Students[0][7] = "Average";
 
         while(true)
         {
@@ -49,15 +49,15 @@ public class Main
      */
     static void checkAndExtend()
     {
-        if(numOfElements == Array.length-1) // Check if array is almost full, then extends it.
+        if(numOfElements == Students.length-1) // Check if array is almost full, then extends it.
         {
-            String[][] tmp = Array.clone();
-            Array = new String[Rows+=5][COLUMNS];
+            String[][] tmp = Students.clone();
+            Students = new String[Rows+=5][COLUMNS];
             for (int i = 0; i < tmp.length; i++)
             {
                 for (int j = 0; j < tmp[i].length; j++)
                 {
-                    Array[i][j] = tmp[i][j];
+                    Students[i][j] = tmp[i][j];
                 }
             }
         }
@@ -101,25 +101,26 @@ public class Main
                     Integer.parseInt(Midterms),
                     Integer.parseInt(Finals));
 
-        for (int i = 1; i < Array.length; i++)
+        for (int i = 1; i < Students.length; i++)
         {
-           for (int j = 0; j < Array[i].length-1;i++)
+           for (int j = 0; j < Students[i].length-1; j++)
            {
-              if(Array[i][j] == null){
-                  Array[i][j] = Name;
-                  Array[i][j+1] = Section;
-                  Array[i][j+2] = Quizzes;
-                  Array[i][j+3] = writtenWorks;
-                  Array[i][j+4] = Performance;
-                  Array[i][j+5] = Midterms;
-                  Array[i][j+6] = Finals;
-                  Array[i][j+7] = Float.valueOf(Average).toString();
+              if(Students[i][j] == null)
+              {
+                  Students[i][j] = Name;
+                  Students[i][j+1] = Section;
+                  Students[i][j+2] = Quizzes;
+                  Students[i][j+3] = writtenWorks;
+                  Students[i][j+4] = Performance;
+                  Students[i][j+5] = Midterms;
+                  Students[i][j+6] = Finals;
+                  Students[i][j+7] = Float.valueOf(Average).toString();
                   ++numOfElements;
                   break;
               }
            }
 
-           if(Array[i][0] != null)
+           if(Students[i][0] != null)
            {
                break;
            }
@@ -146,8 +147,15 @@ public class Main
                 int _row = scanner.nextInt();
                 inputValidator(_row);
 
-                for (int i = 0; i < Array[0].length; i++) {
-                    System.out.printf("%-20s|",Array[0][i]);
+                if(_row == 0 || Students[_row][0] == null)
+                {
+                    System.out.println("""
+                    Error: entry non-existent
+                    """);
+                }else{
+                for (int i = 0; i < Students[0].length; i++)
+                {
+                    System.out.printf("%-20s|", Students[0][i]);
                 }
 
                 System.out.println();
@@ -155,22 +163,23 @@ public class Main
                     System.out.print("-");
                 }
 
-                for (int i = 0; i < Array.length; i++)
+                for (int i = 0; i < Students.length; i++)
                 {
                     if(i == _row)
                     {
-                        for (int j = 0; j < Array[i].length; j++)
+                        for (int j = 0; j < Students[i].length; j++)
                         {
-                            System.out.printf("%-20s|",Array[i][j]);
+                            System.out.printf("%-20s|", Students[i][j]);
                         }
                     }
                     System.out.println();
+                    }
                 }
                 break;
             case 2:
 
-                for (int i = 0; i < Array[0].length; i++) {
-                    System.out.printf("%-20s|",Array[0][i]);
+                for (int i = 0; i < Students[0].length; i++) {
+                    System.out.printf("%-20s|", Students[0][i]);
                 }
 
                 System.out.println();
@@ -179,13 +188,13 @@ public class Main
                 }
                 System.out.println();
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
-                    if(Array[i][0] != null)
+                    if(Students[i][0] != null)
                     {
-                        for (int j = 0; j < Array[i].length; j++)
+                        for (int j = 0; j < Students[i].length; j++)
                         {
-                            System.out.printf("%-20s|",Array[i][j]);
+                            System.out.printf("%-20s|", Students[i][j]);
                         }
                         System.out.println();
                     }
@@ -207,7 +216,7 @@ public class Main
     {
         System.out.println("Select which row entry to update: ");
         int _row = scanner.nextInt();
-        if(_row == 0 || Array[_row][0] == null)
+        if(_row == 0 || Students[_row][0] == null)
         {
             System.out.println("""
                     Error: entry non-existent
@@ -234,11 +243,11 @@ public class Main
                 Name = scanner.nextLine();
                 inputValidator(Name);
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if(i == _row)
                     {
-                        Array[i][0] = Name;
+                        Students[i][0] = Name;
                     }
                 }
                 break;
@@ -247,11 +256,11 @@ public class Main
                 System.out.println("Enter section: ");
                 Section = scanner.nextLine();
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if(i == _row)
                     {
-                        Array[i][1] = Section;
+                        Students[i][1] = Section;
                     }
                 }
                 break;
@@ -260,17 +269,17 @@ public class Main
                 Quizzes = scanner.next();
                 inputValidator(Quizzes);
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if(i == _row)
                     {
-                        Array[i][2] = Quizzes;
+                        Students[i][2] = Quizzes;
                         getAverage( Integer.parseInt(Quizzes),
                                     Integer.parseInt(writtenWorks),
                                     Integer.parseInt(Performance),
                                     Integer.parseInt(Midterms),
                                     Integer.parseInt(Finals));
-                        Array[i][7] = Float.valueOf(Average).toString();
+                        Students[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
@@ -279,17 +288,17 @@ public class Main
                 writtenWorks = scanner.next();
                 inputValidator(writtenWorks);
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if(i == _row)
                     {
-                        Array[i][3] = writtenWorks;
+                        Students[i][3] = writtenWorks;
                         getAverage( Integer.parseInt(Quizzes),
                                     Integer.parseInt(writtenWorks),
                                     Integer.parseInt(Performance),
                                     Integer.parseInt(Midterms),
                                     Integer.parseInt(Finals));
-                        Array[i][7] = Float.valueOf(Average).toString();
+                        Students[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
@@ -298,16 +307,16 @@ public class Main
                 Performance = scanner.next();
                 inputValidator(Performance);
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if (i == _row) {
-                        Array[i][4] = Performance;
+                        Students[i][4] = Performance;
                         getAverage( Integer.parseInt(Quizzes),
                                     Integer.parseInt(writtenWorks),
                                     Integer.parseInt(Performance),
                                     Integer.parseInt(Midterms),
                                     Integer.parseInt(Finals));
-                        Array[i][7] = Float.valueOf(Average).toString();
+                        Students[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
@@ -316,16 +325,16 @@ public class Main
                 Midterms = scanner.next();
                 inputValidator(Midterms);
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if (i == _row) {
-                        Array[i][5] = Midterms;
+                        Students[i][5] = Midterms;
                         getAverage( Integer.parseInt(Quizzes),
                                     Integer.parseInt(writtenWorks),
                                     Integer.parseInt(Performance),
                                     Integer.parseInt(Midterms),
                                     Integer.parseInt(Finals));
-                        Array[i][7] = Float.valueOf(Average).toString();
+                        Students[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
@@ -334,16 +343,16 @@ public class Main
                 Finals = scanner.next();
                 inputValidator(Finals);
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if (i == _row) {
-                        Array[i][6] = Finals;
+                        Students[i][6] = Finals;
                         getAverage( Integer.parseInt(Quizzes),
                                     Integer.parseInt(writtenWorks),
                                     Integer.parseInt(Performance),
                                     Integer.parseInt(Midterms),
                                     Integer.parseInt(Finals));
-                        Array[i][7] = Float.valueOf(Average).toString();
+                        Students[i][7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
@@ -387,20 +396,20 @@ public class Main
                             Integer.parseInt(Midterms),
                             Integer.parseInt(Finals));
 
-                for (int i = 1; i < Array.length; i++)
+                for (int i = 1; i < Students.length; i++)
                 {
                     if(i == _row)
                     {
-                        for (int j = 0; j < Array[i].length-1;)
+                        for (int j = 0; j < Students[i].length-1;)
                         {
-                            Array[i][j] = Name;
-                            Array[i][j+1] = Section;
-                            Array[i][j+2] = Quizzes;
-                            Array[i][j+3] = writtenWorks;
-                            Array[i][j+4] = Performance;
-                            Array[i][j+5] = Midterms;
-                            Array[i][j+6] = Finals;
-                            Array[i][j+7] = Float.valueOf(Average).toString();
+                            Students[i][j] = Name;
+                            Students[i][j+1] = Section;
+                            Students[i][j+2] = Quizzes;
+                            Students[i][j+3] = writtenWorks;
+                            Students[i][j+4] = Performance;
+                            Students[i][j+5] = Midterms;
+                            Students[i][j+6] = Finals;
+                            Students[i][j+7] = Float.valueOf(Average).toString();
                         }
                     }
                 }
@@ -422,14 +431,14 @@ public class Main
     {
         System.out.println("Select which row entry to delete: ");
         int _row = scanner.nextInt();
-        if(!inputValidator(_row) && Array[_row][0] != null){
-            for (int i = 1; i < Array.length; i++)
+        if(!inputValidator(_row) && Students[_row][0] != null){
+            for (int i = 1; i < Students.length; i++)
             {
                 if(i == _row)
                 {
-                    for (int j = 0; j < Array[i].length; j++)
+                    for (int j = 0; j < Students[i].length; j++)
                     {
-                        Array[i][j] = null;
+                        Students[i][j] = null;
                     }
                 }
             }
