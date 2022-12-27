@@ -100,7 +100,7 @@ public class Main
 
         for (int i = 1; i < Students.length; i++)
         {
-           for (int j = 0; j < Students[i].length-1; j++)
+           for (int j = 0; j < Students[i].length-1; i++)
            {
               if(Students[i][j] == null)
               {
@@ -180,6 +180,7 @@ public class Main
 
                 for (int i = 1; i < Students.length; i++)
                 {
+                    if(Students[i][0] != null)
                     {
                         for (int j = 0; j < Students[i].length; j++)
                         {
