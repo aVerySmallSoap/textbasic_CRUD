@@ -151,8 +151,7 @@ public class Main
                 System.out.println("Enter row: ");
                 int _row = scanner.nextInt();
                 inputValidator(_row);
-                if(_row == 0 || _row > Students.length){
-
+                if(!(_row == 0 || _row > Students.length)){
                 for (int i = 0; i < Students[0].length; i++)
                 {
                     System.out.printf("%-20s|", Students[0][i]);
