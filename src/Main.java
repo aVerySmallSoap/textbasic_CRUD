@@ -9,7 +9,6 @@ public class Main
     static String[][] Students = new String[Rows][COLUMNS];
     static Scanner scanner = new Scanner(System.in);
 
-
     public static void main(String[] args)
     {
         Students[0][0] = "Name"; Students[0][1] = "Section"; Students[0][2] = "Quizzes"; Students[0][3] = "Written Works"; Students[0][4] = "Performance"; Students[0][5] = "Midterms"; Students[0][6] = "Finals"; Students[0][7] = "Average";
@@ -161,6 +160,7 @@ public class Main
                 for (int i = 0; i <= 167; i++) {
                     System.out.print("-");
                 }
+                System.out.println();
 
                     for (int i = 0; i < Students.length; i++)
                     {
