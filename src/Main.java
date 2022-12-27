@@ -1,7 +1,4 @@
 //BUILT AND INDEXED USING JAVA DEVELOPMENT KIT v18
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
 public class Main
 {
@@ -119,7 +116,6 @@ public class Main
                   break;
               }
            }
-
            if(Students[i][0] != null)
            {
                break;
@@ -145,7 +141,8 @@ public class Main
             case 1:
                 System.out.println("Enter row: ");
                 int _row = scanner.nextInt();
-                if(!inputValidator(_row)){
+                inputValidator(_row);
+                if(_row == 0 || _row > Students.length){
 
                 for (int i = 0; i < Students[0].length; i++)
                 {
@@ -165,13 +162,12 @@ public class Main
                             {
                                 System.out.printf("%-20s|", Students[i][j]);
                             }
+                            System.out.println();
                         }
-                        System.out.println();
                     }
                 }
                 break;
             case 2:
-
                 for (int i = 0; i < Students[0].length; i++) {
                     System.out.printf("%-20s|", Students[0][i]);
                 }
@@ -184,7 +180,6 @@ public class Main
 
                 for (int i = 1; i < Students.length; i++)
                 {
-                    if(Students[i][0] != null)
                     {
                         for (int j = 0; j < Students[i].length; j++)
                         {
@@ -358,30 +353,24 @@ public class Main
 
                 System.out.println("Enter student's section: ");
                 Section = scanner.nextLine();
-
                 System.out.println("Enter student's Quizzes: ");
                 Quizzes = scanner.next();
-
                 inputValidator(Quizzes);
 
                 System.out.println("Enter student's Written Works: ");
                 writtenWorks = scanner.next();
-
                 inputValidator(writtenWorks);
 
                 System.out.println("Enter student's Performance: ");
                 Performance = scanner.next();
-
                 inputValidator(Performance);
 
                 System.out.println("Enter student's Midterms: ");
                 Midterms = scanner.next();
-
                 inputValidator(Midterms);
 
                 System.out.println("Enter student's Finals: ");
                 Finals = scanner.next();
-
                 inputValidator(Finals);
 
                 getAverage( Integer.parseInt(Quizzes),
@@ -394,17 +383,15 @@ public class Main
                 {
                     if(i == _row)
                     {
-                        for (int j = 0; j < Students[i].length-1;)
-                        {
-                            Students[i][j] = Name;
-                            Students[i][j+1] = Section;
-                            Students[i][j+2] = Quizzes;
-                            Students[i][j+3] = writtenWorks;
-                            Students[i][j+4] = Performance;
-                            Students[i][j+5] = Midterms;
-                            Students[i][j+6] = Finals;
-                            Students[i][j+7] = Float.valueOf(Average).toString();
-                        }
+                        int j = 0;
+                        Students[i][j] = Name;
+                        Students[i][j+1] = Section;
+                        Students[i][j+2] = Quizzes;
+                        Students[i][j+3] = writtenWorks;
+                        Students[i][j+4] = Performance;
+                        Students[i][j+5] = Midterms;
+                        Students[i][j+6] = Finals;
+                        Students[i][j+7] = Float.valueOf(Average).toString();
                     }
                 }
                 break;
@@ -425,7 +412,8 @@ public class Main
     {
         System.out.println("Select which row entry to delete: ");
         int _row = scanner.nextInt();
-        if(!inputValidator(_row) && Students[_row][0] != null){
+        inputValidator(_row);
+        if(Students[_row][0] != null){
             for (int i = 1; i < Students.length; i++)
             {
                 if(i == _row)
@@ -460,7 +448,7 @@ public class Main
      * Checks the users {@code input} for validation
      * @param input String
      */
-    static void inputValidator(@NotNull String input)
+    static void inputValidator(String input)
     {
         if(input.equals(Name))
         {
@@ -490,15 +478,13 @@ public class Main
      * Checks the users {@code input} for validation
      * @param input int
      */
-    static boolean inputValidator(int input)
+    static void inputValidator(int input)
     {
         if(input > numOfElements || input == 0)
         {
             System.out.println("""
                     Error: entry non-existent
                     """);
-            return true;
         }
-        return false;
     }
 }
