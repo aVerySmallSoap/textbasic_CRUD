@@ -65,9 +65,10 @@ public class Main
      */
     static void createEntry(){
         scanner.nextLine();
+        //This input method could be looped for less code; TODO: Looped input
         System.out.println("Enter a name: ");
         Name = scanner.nextLine();
-        inputValidator(Name);
+        inputValidator(Name); // In every possible loop, this method only needs to be executed once.
 
         System.out.println("Enter student's section: ");
         Section = scanner.nextLine();
@@ -92,12 +93,20 @@ public class Main
         Finals = scanner.next();
         inputValidator(Finals);
 
+        /*
+        As each input gets looped, every STRING containing a number will be parsed into a number; and
+        TODO: Check and store the WRITTEN data to get the AVERAGE;
+        TODO: A variable that will store data in a += manner. Parse STRING input to INT.
+        */
         getAverage( Integer.parseInt(Quizzes),
                     Integer.parseInt(writtenWorks),
                     Integer.parseInt(Performance),
                     Integer.parseInt(Midterms),
                     Integer.parseInt(Finals));
 
+        /*As each input is looped, this nested loop will already function as implemented
+        TODO: LOOP the assigning of data.
+         */
         for (int i = 1; i < Students.length; i++)
         {
            for (int j = 0; j < Students[i].length-1; i++)
